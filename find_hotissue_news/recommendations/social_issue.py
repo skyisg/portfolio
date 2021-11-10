@@ -37,10 +37,8 @@ class Cluster_recom(Issue_rank):
         cluster_dict = dict()
         for cluster_num in unique:
             cluster_dict[cluster_num] = []
-
         for index, cluster_num in zip(id_list, cluster_index):
             cluster_dict[cluster_num] += [index]
-
         return cluster_dict
     
     def get_ko_title(self, news_id):
@@ -59,16 +57,13 @@ class Cluster_recom(Issue_rank):
     def calc_score2(self, cluster_num, cluster_dict, news_data, from_date, to_date):
         recent_news_list = self.time_filter_news_list(news_data, from_date, to_date)
         recent_news_id_list = [news['id'] for news in recent_news_list]
-
         cluster_id_list = cluster_dict[cluster_num]
         cluster_id_length = len(cluster_id_list)
-
         count = 0    
         for news_id in recent_news_id_list:
             if news_id in cluster_id_list:
                 count += 1
         score2 = count / cluster_id_length
-
         return score2
     
     def get_score2_dict(self, cluster_dict, news_data, from_date, to_date):
@@ -92,17 +87,13 @@ class Cluster_recom(Issue_rank):
     def get_topN_cluster_dict(self, cluster_dict, final_score_dict, num_of_cluster, min_cluster):
         rank = sorted(final_score_dict.items(), key=lambda x: x[1], reverse=True)
         rank_cut = [news_id for news_id, _ in rank]
-
-        top_cluster_dict = dict()
-        
+        top_cluster_dict = dict()        
         for top_cluster in rank_cut:
             if len(cluster_dict[top_cluster]) < min_cluster:
                 continue
             top_cluster_dict[top_cluster] = cluster_dict[top_cluster]
-
             if len(top_cluster_dict.keys()) >= num_of_cluster:
                 break
-
         return top_cluster_dict
     
     def show_ko_title(self, top_cluster_dict):
@@ -112,10 +103,4 @@ class Cluster_recom(Issue_rank):
             for news_id in news_id_list:
                 ko_title = self.get_ko_title(news_id)
                 print(ko_title)
-    
-    
-    
-
-
-
-
+                
