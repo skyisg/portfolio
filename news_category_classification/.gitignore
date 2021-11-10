@@ -1,0 +1,14 @@
+# ipython 파일
+*.ipynb
+
+# data폴더
+data/MIND
+data/merge/trayd_classification_dataset.csv
+
+# test 폴더
+test/
+
+# test_merge_datasets folder
+test_merge_datasets/
+
+
