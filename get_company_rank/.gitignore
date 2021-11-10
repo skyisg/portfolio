@@ -1,0 +1,12 @@
+*.log
+__pycache__
+*.swp
+
+# ipython file
+
+*.ipynb
+
+# test folder
+
+test
+data
